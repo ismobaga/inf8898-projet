@@ -14,7 +14,8 @@
 
 \begin{document}
 %
-\title{Planification multicast pour optimiser la consommation d'énergie avec des contraintes de délais}
+\title{Planification multicast pour optimiser la consommation 
+d'\'energie avec des contraintes de d\'elais}
 %
 %\titlerunning{Abbreviated paper title}
 % If the paper title is too long for the running head, you can set
@@ -22,7 +23,7 @@
 %
 \author{Isma\"il Bagayoko}
 %
-\authorrunning{I. Bagayoko et al.}
+% \authorrunning{I. Bagayoko et al.}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
@@ -33,29 +34,79 @@
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-Ces dernières années, le trafic mobile a considérablement augmenté 
-et continue de croître encore plus rapidement, ce qui augmente 
-considérablement les demandes de services, telles que les 
-téléchargements d'images, la musique, les vidéos, etc.
-Il y a une similitude dans les demandes de données à la station de 
-base, ce sont des opérations très répétitives (les mêmes données 
-sont demandées à des intervalles de quelques $ \mu $s.
+Ces dernières années, le trafic mobile a considérablement augmenté. 
+Il y a une similitude dans les demandes de données au niveau station 
+de base. Les requêtes pour les mêmes données sont à des intervalles 
+de juste quelques microsecondes, la station de base se trouve à faire des 
+opérations très répétitives. 
+
+L'ancienne méthode où les requêtes sont servis une à la fois ne 
+fonctionne plus, il n'est pas rentable en matière de ressources 
+(ex: énergie). C'est là qu'intervient la multi-diffusion (multicast), 
+elle consiste à servir plusieurs requêtes en un seul envoi (réponse).
+Il faut attendre de recevoir  plusieurs requêtes pour les servir en 
+un seul envoi. On s'aperçoit tout de suite que l'idéal c'est d'attendre 
+infiniment et servir. Les premières requêtes vont beaucoup attendre pour 
+être servis.
+
+Il y a un compromis à  faire ici, plus on attend plus on économise en 
+ressources mais plus l'on attend plus nous perdons en matière de qualité 
+de service. Un exemple d'utilisation est un fournisseur d'accès internet 
+qui veut minimiser l'utilisation des ressources mais respecter les délais 
+payés par les clients.un
+
+La multi-diffusion bien qu'existe depuis très longtemps, au cours des 
+dernières années elle a suscité beaucoup d'intérêt dû aux nombreux 
+avantages qu'elle apporte: le coût en énergie, l'utilisation efficace 
+du canal et bien d'autres.
 
 The abstract should briefly summarize the contents of the paper in
 150--250 words.
 
-\keywords{First keyword  \and Second keyword \and Another keyword.}
+\keywords{First keyword  \and Second keyword. }
 \end{abstract}
 %
 %
 %
-\section{First Section}
-\subsection{A Subsection Sample}
-Please note that the first paragraph of a section or subsection is
-not indented. The first paragraph that follows a table, figure,
-equation etc. does not need an indent, either.
+\section{Introduction}
+\section{Formulation du problème}
+Nous considérons un ensemble $R$ de requêtes défini comme 
+$R = \{(a, d, m, e )_i\} $ où :
+\begin{itemize}
+    \item $a_i$ est l'instant d'arriver de la requête $i$
+    \item $d_i$ est le dernier instant que peut tolérer la requête $i$
+    \item $m_i$ est l'identifiant du contenu (message) demandé par la requête  $i$
+    \item $e_i$ l'énergie nécessaire pour répondre à la requête $i$
+\end{itemize} 
 
-Subsequent paragraphs, however, are indented.
+On définit les variables de décision:
+\begin{itemize}
+    \item $x_i$ est l'instant d'envoi de la requête $i$ à  déterminer 
+    \item $y_m$ est l'instant d'envoi du message  $m$ à  déterminer 
+    \item $E_t$ représente l'énergie consommée a un instant $t$
+    \item $E_t^m$ représente l'énergie consommée a un instant $t$ pour 
+    le message $m$
+\end{itemize}
+
+Nous consid\'erons les deux cas suivant lorsqu'un seul contenu o\`u plusieurs 
+sont disponibles pour la multidiffusion est disponible au niveau de la 
+station de base.
+\subsubsection{Un message}
+\[
+    \begin{array}{cc}
+         \textbf{minimiser} &  \sum\limits_{t} E_t\\
+         \textbf{Sous contraintes} & \\
+         & E_t = \max\limits_{x_i=t} e_i \\
+         & a_i \leq x_i \leq d_i\\
+    \end{array}
+\] 
+\subsubsection{Plus d'n message}
+\section{Solutions propos\'es }
+\subsection{Une solution na\"ive }
+\subsection{Une m\'ethode gloutonne}
+
+\subsection{Un algorithme g\'en\'etique}
+
 
 \subsubsection{Sample Heading (Third Level)} Only two levels of
 headings should be numbered. Lower level headings remain unnumbered;
