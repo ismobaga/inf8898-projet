@@ -100,7 +100,20 @@ station de base.
          & a_i \leq x_i \leq d_i\\
     \end{array}
 \] 
+
 \subsubsection{Plus d'n message}
+Il faut ajouter une condition pour que deux messages différents ne puissent pas être envoy\'es au même moment.\\
+L'idée c'est de dire qu'un seul $E_t^m$ peut être différent de zéro a la fois.
+\[
+    \begin{array}{cc}
+         \textbf{minimiser} &  \sum \limits_{m}\sum\limits_{t} E_t^m\\
+         \textbf{Sous contraintes} & \\
+         & a_i \leq x_i \leq d_i\\
+         & E_t^m = \max\limits_{x_i=t \textbf{ et } m_i=m} e_i \\
+         & \sum\limits_{m}  1_{ E_t^m\geq 0} \leq 1 \textbf{ pour l'ensemble des messages} \\
+    \end{array}
+\]
+
 \section{Solutions propos\'es }
 \subsection{Une solution na\"ive }
 \subsection{Une m\'ethode gloutonne}
