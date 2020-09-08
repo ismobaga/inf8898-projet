@@ -333,11 +333,13 @@ Dans notre simulation, nous considérons que le gain du canal est constant
 et suit une distribution uniforme de \cite{huang2016}.
 Nous considérons également les valeurs d'initialisation de \cite{huang2016} 
 pour le bruit $ \tau $ comme une unité et la puissance $ \rho $ comme 
-$ 1 watt $. Pour le débit de données, nous utilisons $1Kb/ms/1Mhz$
+$ 1 watt $. Pour le débit de données, nous utilisons $1Kb/ms/1Mhz$.
+
+
 
 \subsection{Consommation d'\'nergie vs Charge du syst\`eme}
-Fig.~\ref{fig:evslm4} repr\'esente la consommation d'énergie sur 
-la charge du système (nombre de requêtes par unit\'e de temps).
+Fig.~\ref{fig:evslm1} et ~\ref{fig:evslm4}  repr\'esentent la consommation d'énergie sur 
+la charge du système (nombre de requêtes par unit\'e de temps) avec 1 et 4 messages.
 Au tout début, le nos methodes ont des consommations simiulaire parce que les
 trois font de la mono diffusion (unicast). Le nombre de requêtes n'est pas 
 assez nombre pour du multicast.
@@ -347,71 +349,40 @@ aléatoire dans sa pratique.
     
     \includegraphics[width=\textwidth]{EvsL1.eps}
     \caption{Consommation d'énergie vs La charge du système, pour 
-    le nombre de contenu disponible \`a la station de base $m=1$} \label{fig1}
-    \label{fig:evslm4}
+    le nombre de contenu disponible \`a la station de base $m=1$} 
+    \label{fig:evslm1}
 \end{figure}
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{EvsL4.eps}
     \caption{Consommation d'énergie vs La charge du système, pour 
-    le nombre de contenu disponible \`a la station de base $m=4$} \label{fig1}
+    le nombre de contenu disponible \`a la station de base $m=4$} 
+    \label{fig:evslm4}
+\end{figure}
+\subsection{Consommation d'\'nergie vs Charge du syst\`eme}
+Nous avons utilisé une différente fonction pour évaluer la consommation 
+d'énergie pour l'algorithme génétique.
+La contrainte qui dit qu'un seul message doit être envoyé à la 
+fois n'est  pas respecté a chaque fois.
+On accepte cette exception mais avec des pénalités. 
+on peut observer les compromis sur Fig.~\ref{fig:dvslm1} et \ref{fig:dvslm4}
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{DvsL1.eps}
+    \caption{Consommation d'énergie vs La charge du système, pour 
+    le nombre de contenu disponible \`a la station de base $m=4$} 
+    \label{fig:dvslm1}
+\end{figure}
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{DvsL4.eps}
+    \caption{Consommation d'énergie vs La charge du système, pour 
+    le nombre de contenu disponible \`a la station de base $m=4$} 
+    \label{fig:dvslm4}
 \end{figure}
 
 
-% \paragraph{Sample Heading (Fourth Level)}
 
-% \begin{table}
-% \caption{Table captions should be placed above the
-% tables.}\label{tab1}
-% \begin{tabular}{|l|l|l|}
-% \hline
-% Heading level &  Example & Font size and style\\
-% \hline
-% Title (centered) &  {\Large\bfseries Lecture Notes} & 14 point, bold\\
-% 1st-level heading &  {\large\bfseries 1 Introduction} & 12 point, bold\\
-% 2nd-level heading & {\bfseries 2.1 Printing Area} & 10 point, bold\\
-% 3rd-level heading & {\bfseries Run-in Heading in Bold.} Text follows & 10 point, bold\\
-% 4th-level heading & {\itshape Lowest Level Heading.} Text follows & 10 point, italic\\
-% \hline
-% \end{tabular}
-% \end{table}
+% \subsection{Temps d'ex\'ecution vs Charge du syst\`eme}
 
-
-% \noindent Displayed equations are centered and set on a separate
-% line.
-% \begin{equation}
-% x + y = z
-% \end{equation}
-% Please try to avoid rasterized images for line-art diagrams and
-% schemas. Whenever possible, use vector graphics instead (see
-
-
-
-% \begin{theorem}
-% This is a sample theorem. The run-in heading is set in bo
-% \end{theorem}
-%
-% the environments 'definition', 'lemma', 'proposition', 'corollary',
-% 'remark', and 'example' are defined in the LLNCS documentclass as well.
-%
-% \begin{proof}
-% Proofs, examples, and remarks have the initial word in 
-% \end{proof}
-% For citations of references, we prefer the use of square brackets
-% and consecutive numbers. Citations using labels or the author/year
-% convention are also acceptable. The following bibliography provides
-% a sample reference list with entries for journal
-% articles~\cite{ref_article1}, an LNCS chapter~\cite{ref_lncs1}, a
-% book~\cite{ref_book1}, proceedings without editors~\cite{ref_proc1},
-% and a homepage~\cite{ref_url1}. Multiple citations are grouped
-% \cite{ref_article1,ref_lncs1,ref_book1},
-% \cite{ref_article1,ref_book1,ref_proc1,ref_url1}.
-%
-% ---- Bibliography ----
-%
-% BibTeX users should specify bibliography style 'splncs04'.
-% References will then be sorted and formatted in the correct style.
-%
 \bibliographystyle{splncs04}
 \bibliography{references}
 
