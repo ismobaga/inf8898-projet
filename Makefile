@@ -1,9 +1,12 @@
-# Only run install if requirements.txt is newer than vendored folder
 
-.PHONY: install run
+
+.PHONY: install run gen-data
 
 
 run: src/bench.py
+	python src/bench.py
+
+gen-data: src/data.py
 	python src/bench.py
 
 install:

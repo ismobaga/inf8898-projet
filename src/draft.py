@@ -22,6 +22,11 @@ def getAP(indexes, elts, i):
         elts[idx[j]:idx[j+1]] for j in range((len(idx) - 1)) 
     ]
 
+while True:
+    i = int(input("Size : "))
+    idxes = [[]] + generateIndex([], i)
+    print("La tialle est de : ", len(idxes))
+
 
 elts = list(range(4))
 idxes = [[]] + generateIndex([], len(elts))

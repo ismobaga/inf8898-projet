@@ -14,9 +14,10 @@ def naive(entries):
     energie = []
     delay = []
     h=0
+    i = 1
     for p in ok_partition(entries):
-        # print(h)
-        h+=1
+        i+=1
+        # print(i)
         e =[]
         d= []
         for envoie in p:
@@ -24,9 +25,6 @@ def naive(entries):
             d += [delais(np.array(envoie))]
         energie += [sum(e)]
         delay += [sum(d)]
-        # print(sum(e), sum(d))
     i = np.argmin(energie)
 
     return energie[i], delay[i]
-  # print(energie)
-  # print(delay)

@@ -31,12 +31,19 @@ def genReqs(l=2, de=5, m=4, T=20, seedv=1):
             ]]
     return reqs
 
-def get(lam):
-    filename = "./data/%.2f.csv"%(lam)
+def get(lam, m=4):
+    # filename = "./data/%.2f.csv"%(lam)
+    filename = "./data/%.2f-%d.csv"%(lam, m)
     return reader(filename)
 
-def generate():
+def generate(m=4):
     for l in np.arange(0.25, 5.001, 0.20):
-        en = genReqs(l=l, seedv=10)
-        filename = "./data/%.2f.csv"%(l)
+        en = genReqs(l=l, m=m, seedv=10)
+        filename = "./data/%.2f-%d.csv"%(l, m)
         writer(en, filename)
+
+
+if __name__ == "__main__":
+    generate(m=1)
+    generate(m=4)
+    
