@@ -20,11 +20,11 @@
 \title{Planification multicast pour optimiser la consommation 
 d'\'energie avec des contraintes de d\'elais}
 %
-%\titlerunning{Abbreviated paper title}
+\titlerunning{Planification multicast \dots}
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-\author{Isma\"il Bagayoko}
+\author{Isma\"il Bagayoko\orcidID{BAGI14069802}}
 %
 % \authorrunning{I. Bagayoko et al.}
 % First names are abbreviated in the running head.
@@ -122,6 +122,7 @@ L'idée c'est de dire qu'un seul $E_t^m$ peut être différent de zéro a la foi
 
 \section{Solutions propos\'es }
 \subsection{Une solution na\"ive }
+$O(2^n)$ 
 \begin{algorithm}[H]
     \caption{Naive}%
     \label{alg:naive}
@@ -142,6 +143,7 @@ L'idée c'est de dire qu'un seul $E_t^m$ peut être différent de zéro a la foi
 
   
 \subsection{Une m\'ethode gloutonne}
+$O(n)$
 \begin{algorithm}[H]
     \caption{gloutonne}%
     \label{alg:greedy}
@@ -166,6 +168,43 @@ L'idée c'est de dire qu'un seul $E_t^m$ peut être différent de zéro a la foi
   \end{algorithm}
 
 \subsection{Un algorithme g\'en\'etique}
+\begin{algorithm}[H]
+    \caption{Genetique}%
+    \label{alg:genetic}
+    \begin{algorithmic}[1]
+        \State {$P \gets $ generer une populaion}
+        \State {$S \gets$ meilleur individu de notre population $P$}
+        \While{$i <$ Nombre maximum d'iterations }
+            \For{Individu dans $P$}
+                \State Fils $ \gets  $\Call{NouvelleGenration}{Individu}
+                \State Individu $\gets $ Fils
+                \If{Fils.Energie < S.score}
+                    \State{ $S \gets $ Fils}
+                \EndIf{}
+            \EndFor{}
+        \EndWhile{}
+
+    \State \Return{$S$}
+    
+        % return energie[i], delay[i]
+    \end{algorithmic}
+\end{algorithm}
+\begin{algorithm}[H]
+    \caption{NouvelleGenration}%
+    \label{alg:ngeneration}
+    \begin{algorithmic}[1]
+        \State{sélectionner au hasard un sous-ensemble}
+        \State{Fils1 $\gets$ le sous-ensemble agrendit}
+        \State{Fils2 $\gets$ le sous-ensemble r\'eduit}
+        \State{Fils3 $\gets$ augment\'e le nombre de sous ensemble}
+        \State{Calculer les scores}
+    \State \Return{Le fils avec le meilleur score}
+    
+        % return energie[i], delay[i]
+    \end{algorithmic}
+\end{algorithm}
+
+
 
 \section{R\'esultats num\'eriques}
 Pour évaluer les performances de nos algorithmes, nous avons estimé la 
@@ -200,51 +239,47 @@ aléatoire dans sa pratique.
     Please note that short captions are centered, while long ones are
     justified by the macro package automatically.} \label{fig1}
 \end{figure}
-\subsubsection{Sample Heading (Third Level)} Only two levels of
-headings should be numbered. Lower level headings remain unnumbered;
-they are formatted as run-in headings.
-
-\paragraph{Sample Heading (Fourth Level)}
-The contribution should contain no more than four levels of
-headings. Table~\ref{tab1} gives a summary of all heading levels.
-
-\begin{table}
-\caption{Table captions should be placed above the
-tables.}\label{tab1}
-\begin{tabular}{|l|l|l|}
-\hline
-Heading level &  Example & Font size and style\\
-\hline
-Title (centered) &  {\Large\bfseries Lecture Notes} & 14 point, bold\\
-1st-level heading &  {\large\bfseries 1 Introduction} & 12 point, bold\\
-2nd-level heading & {\bfseries 2.1 Printing Area} & 10 point, bold\\
-3rd-level heading & {\bfseries Run-in Heading in Bold.} Text follows & 10 point, bold\\
-4th-level heading & {\itshape Lowest Level Heading.} Text follows & 10 point, italic\\
-\hline
-\end{tabular}
-\end{table}
 
 
-\noindent Displayed equations are centered and set on a separate
-line.
-\begin{equation}
-x + y = z
-\end{equation}
-Please try to avoid rasterized images for line-art diagrams and
-schemas. Whenever possible, use vector graphics instead (see
+% \paragraph{Sample Heading (Fourth Level)}
+
+% \begin{table}
+% \caption{Table captions should be placed above the
+% tables.}\label{tab1}
+% \begin{tabular}{|l|l|l|}
+% \hline
+% Heading level &  Example & Font size and style\\
+% \hline
+% Title (centered) &  {\Large\bfseries Lecture Notes} & 14 point, bold\\
+% 1st-level heading &  {\large\bfseries 1 Introduction} & 12 point, bold\\
+% 2nd-level heading & {\bfseries 2.1 Printing Area} & 10 point, bold\\
+% 3rd-level heading & {\bfseries Run-in Heading in Bold.} Text follows & 10 point, bold\\
+% 4th-level heading & {\itshape Lowest Level Heading.} Text follows & 10 point, italic\\
+% \hline
+% \end{tabular}
+% \end{table}
+
+
+% \noindent Displayed equations are centered and set on a separate
+% line.
+% \begin{equation}
+% x + y = z
+% \end{equation}
+% Please try to avoid rasterized images for line-art diagrams and
+% schemas. Whenever possible, use vector graphics instead (see
 
 
 
-\begin{theorem}
-This is a sample theorem. The run-in heading is set in bo
-\end{theorem}
+% \begin{theorem}
+% This is a sample theorem. The run-in heading is set in bo
+% \end{theorem}
 %
 % the environments 'definition', 'lemma', 'proposition', 'corollary',
 % 'remark', and 'example' are defined in the LLNCS documentclass as well.
 %
-\begin{proof}
-Proofs, examples, and remarks have the initial word in 
-\end{proof}
+% \begin{proof}
+% Proofs, examples, and remarks have the initial word in 
+% \end{proof}
 % For citations of references, we prefer the use of square brackets
 % and consecutive numbers. Citations using labels or the author/year
 % convention are also acceptable. The following bibliography provides
@@ -262,26 +297,5 @@ Proofs, examples, and remarks have the initial word in
 %
 \bibliographystyle{splncs04}
 \bibliography{references}
-%
-% \begin{thebibliography}{8}
-% \bibitem{ref_article1}
-% Author, F.: Article title. Journal \textbf{2}(5), 99--110 (2016)
 
-% \bibitem{ref_lncs1}
-% Author, F., Author, S.: Title of a proceedings paper. In: Editor,
-% F., Editor, S. (eds.) CONFERENCE 2016, LNCS, vol. 9999, pp. 1--13.
-% Springer, Heidelberg (2016). \doi{10.10007/1234567890}
-
-% \bibitem{ref_book1}
-% Author, F., Author, S., Author, T.: Book title. 2nd edn. Publisher,
-% Location (1999)
-
-% \bibitem{ref_proc1}
-% Author, A.-B.: Contribution title. In: 9th International Proceedings
-% on Proceedings, pp. 1--2. Publisher, Location (2010)
-
-% \bibitem{ref_url1}
-% LNCS Homepage, \url{http://www.springer.com/lncs}. Last accessed 4
-% Oct 2017
-% \end{thebibliography}
 \end{document}
