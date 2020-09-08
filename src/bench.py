@@ -6,6 +6,7 @@ import data
 import statistics
 import sys
 import time
+import numpy as np
 
 entries =[
            [0, 3, 1, 4],
@@ -35,16 +36,19 @@ class Benchmark:
                 print("{} {:3.2f} {:3.2f}".format(
                     1 + i, mean,
                     statistics.stdev(timings, mean) if i > 1 else 0))
+l = 0.45
 
-n = naive(entries)
-g = greedy(entries)
-ge = genetic(entries)
+for l in np.arange(0.25, 5.001, 0.20):
+    # n = naive(data.get(l))
+    g = greedy(data.get(l))
+    ge = genetic(data.get(l))
+    print(g)
+    print(ge)
 
 # print(data.get(2.85))
-Benchmark.run(lambda : naive(data.get(2.85)))
-print(n)
-print(g)
-print(ge)
+# Benchmark.run(lambda : genetic(data.get(4.85)))
+# print(n)
+
 
 
 
