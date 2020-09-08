@@ -5,6 +5,9 @@
 \documentclass[runningheads]{llncs}
 %
 \usepackage{graphicx}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
 %
@@ -69,6 +72,9 @@ The abstract should briefly summarize the contents of the paper in
 %
 %
 \section{Introduction}
+Le reste de ce projet est organis\'e comme suit. Nous présentons le modèle de réseau.
+Ensuite, la formulation du problème d'ordonnancement multicast est pr\'esent\'e.
+Des r\'esultats numériques seront fournis.
 \section{Formulation du problème}
 Nous considérons un ensemble $R$ de requêtes défini comme 
 $R = \{(a, d, m, e )_i\} $ où :
@@ -116,24 +122,84 @@ L'idée c'est de dire qu'un seul $E_t^m$ peut être différent de zéro a la foi
 
 \section{Solutions propos\'es }
 \subsection{Une solution na\"ive }
+\begin{algorithm}[H]
+    \caption{Naive}%
+    \label{alg:naive}
+    \begin{algorithmic}[1]
+        \State {$P \gets $ Toutes les partitions de $R$}
+        \For{$p \in P$}
+        \Comment{Pour chaque partition}
+        \State{Verifier si la partition respecte les contrainte}
+        \State{Calculer la consommaion d'energie et le delais}
+        \EndFor{}
+        
+        \State{Choisir la partition qui consomme le moins d'\'energie}
+    
+        % return energie[i], delay[i]
+    \end{algorithmic}
+\end{algorithm}
+
+
+  
 \subsection{Une m\'ethode gloutonne}
+\begin{algorithm}[H]
+    \caption{gloutonne}%
+    \label{alg:greedy}
+    \begin{algorithmic}[1]
+      \While{$R \ne \emptyset$}
+        \State{$ G \gets \emptyset $}
+        \State{$ S \gets$ requ\^ete qui demande la plus grande \'energie }
+        \State $ R \gets R - \{S\}$
+        \State $ G \gets G \cup \{S\}$
+      % $remove(no\_scheduled, selected)$\;
+      % $add(multicast\_group, selected)$\;
+      
+      \For{$r \in R$} 
+           \If{$r$ peut être ajouté à $G$}
+            \State{ $ R \gets R - \{r\}$}
+            \State{ $ G \gets G \cup \{r\}$}
+          \EndIf{}
+       \EndFor{}
+       Planifier $G$ pour temps de $S$
+      \EndWhile{}
+    \end{algorithmic}
+  \end{algorithm}
 
 \subsection{Un algorithme g\'en\'etique}
 
 \section{R\'esultats num\'eriques}
-\begin{figure}
+Pour évaluer les performances de nos algorithmes, nous avons estimé la 
+consommation totale d'énergie en fonction du trafic à notre station de 
+base dans un premier temps. Le delais des utilisateurs est aussi mesur\'e.
+Dans notre simulation, nous considérons que le gain du canal est constant 
+et suit une distribution uniforme de \cite{huang2016}.
+Nous considérons également les valeurs d'initialisation de \cite{huang2016} 
+pour le bruit $ \tau $ comme une unité et la puissance $ \rho $ comme 
+$ 1 watt $. Pour le débit de données, nous utilisons $1Kb/ms/1Mhz$
+
+\subsection{Consommation d'\'nergie vs Charge du syst\`eme}
+Fig.~\ref{fig:evslm4} repr\'esente la consommation d'énergie sur 
+la charge du système (nombre de requêtes par unit\'e de temps).
+Au tout début, le nos methodes ont des consommations simiulaire parce que les
+trois font de la mono diffusion (unicast). Le nombre de requêtes n'est pas 
+assez nombre pour du multicast.
+L'algorithme g\'en\'etique n'est pas stable, ceci est dû au caract\`ere 
+aléatoire dans sa pratique.
+\begin{figure}[H]
+    
     \includegraphics[width=\textwidth]{EvsL.eps}
     \caption{A figure caption is always placed below the illustration.
     Please note that short captions are centered, while long ones are
-    justified by the macro package automatically.} \label{fig1}
-    \end{figure}
+    justified by the macro package automatically.} 
+    \label{fig:evslm4}
+\end{figure}
 
-    \begin{figure}
-        \includegraphics[width=\textwidth]{EvsL1.eps}
-        \caption{A figure caption is always placed below the illustration.
-        Please note that short captions are centered, while long ones are
-        justified by the macro package automatically.} \label{fig1}
-        \end{figure}
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{EvsL1.eps}
+    \caption{A figure caption is always placed below the illustration.
+    Please note that short captions are centered, while long ones are
+    justified by the macro package automatically.} \label{fig1}
+\end{figure}
 \subsubsection{Sample Heading (Third Level)} Only two levels of
 headings should be numbered. Lower level headings remain unnumbered;
 they are formatted as run-in headings.
@@ -166,65 +232,56 @@ x + y = z
 \end{equation}
 Please try to avoid rasterized images for line-art diagrams and
 schemas. Whenever possible, use vector graphics instead (see
-Fig.~\ref{fig1}).
 
-\begin{figure}
-\includegraphics[width=\textwidth]{fig1.eps}
-\caption{A figure caption is always placed below the illustration.
-Please note that short captions are centered, while long ones are
-justified by the macro package automatically.} \label{fig1}
-\end{figure}
+
 
 \begin{theorem}
-This is a sample theorem. The run-in heading is set in bold, while
-the following text appears in italics. Definitions, lemmas,
-propositions, and corollaries are styled the same way.
+This is a sample theorem. The run-in heading is set in bo
 \end{theorem}
 %
 % the environments 'definition', 'lemma', 'proposition', 'corollary',
 % 'remark', and 'example' are defined in the LLNCS documentclass as well.
 %
 \begin{proof}
-Proofs, examples, and remarks have the initial word in italics,
-while the following text appears in normal font.
+Proofs, examples, and remarks have the initial word in 
 \end{proof}
-For citations of references, we prefer the use of square brackets
-and consecutive numbers. Citations using labels or the author/year
-convention are also acceptable. The following bibliography provides
-a sample reference list with entries for journal
-articles~\cite{ref_article1}, an LNCS chapter~\cite{ref_lncs1}, a
-book~\cite{ref_book1}, proceedings without editors~\cite{ref_proc1},
-and a homepage~\cite{ref_url1}. Multiple citations are grouped
-\cite{ref_article1,ref_lncs1,ref_book1},
-\cite{ref_article1,ref_book1,ref_proc1,ref_url1}.
+% For citations of references, we prefer the use of square brackets
+% and consecutive numbers. Citations using labels or the author/year
+% convention are also acceptable. The following bibliography provides
+% a sample reference list with entries for journal
+% articles~\cite{ref_article1}, an LNCS chapter~\cite{ref_lncs1}, a
+% book~\cite{ref_book1}, proceedings without editors~\cite{ref_proc1},
+% and a homepage~\cite{ref_url1}. Multiple citations are grouped
+% \cite{ref_article1,ref_lncs1,ref_book1},
+% \cite{ref_article1,ref_book1,ref_proc1,ref_url1}.
 %
 % ---- Bibliography ----
 %
 % BibTeX users should specify bibliography style 'splncs04'.
 % References will then be sorted and formatted in the correct style.
 %
-% \bibliographystyle{splncs04}
-% \bibliography{mybibliography}
+\bibliographystyle{splncs04}
+\bibliography{references}
 %
-\begin{thebibliography}{8}
-\bibitem{ref_article1}
-Author, F.: Article title. Journal \textbf{2}(5), 99--110 (2016)
+% \begin{thebibliography}{8}
+% \bibitem{ref_article1}
+% Author, F.: Article title. Journal \textbf{2}(5), 99--110 (2016)
 
-\bibitem{ref_lncs1}
-Author, F., Author, S.: Title of a proceedings paper. In: Editor,
-F., Editor, S. (eds.) CONFERENCE 2016, LNCS, vol. 9999, pp. 1--13.
-Springer, Heidelberg (2016). \doi{10.10007/1234567890}
+% \bibitem{ref_lncs1}
+% Author, F., Author, S.: Title of a proceedings paper. In: Editor,
+% F., Editor, S. (eds.) CONFERENCE 2016, LNCS, vol. 9999, pp. 1--13.
+% Springer, Heidelberg (2016). \doi{10.10007/1234567890}
 
-\bibitem{ref_book1}
-Author, F., Author, S., Author, T.: Book title. 2nd edn. Publisher,
-Location (1999)
+% \bibitem{ref_book1}
+% Author, F., Author, S., Author, T.: Book title. 2nd edn. Publisher,
+% Location (1999)
 
-\bibitem{ref_proc1}
-Author, A.-B.: Contribution title. In: 9th International Proceedings
-on Proceedings, pp. 1--2. Publisher, Location (2010)
+% \bibitem{ref_proc1}
+% Author, A.-B.: Contribution title. In: 9th International Proceedings
+% on Proceedings, pp. 1--2. Publisher, Location (2010)
 
-\bibitem{ref_url1}
-LNCS Homepage, \url{http://www.springer.com/lncs}. Last accessed 4
-Oct 2017
-\end{thebibliography}
+% \bibitem{ref_url1}
+% LNCS Homepage, \url{http://www.springer.com/lncs}. Last accessed 4
+% Oct 2017
+% \end{thebibliography}
 \end{document}
