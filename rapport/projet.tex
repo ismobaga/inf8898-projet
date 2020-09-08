@@ -196,7 +196,7 @@ Ceci est équivalent à générer toutes les partitions d'un ensemble.
 le nombre de partition d'un ensemble $S$ est $2^{|S|}$.
 Le pseudo-code suivant représente les principales étapes de l'algorithme.
 \begin{algorithm}[H]
-    \caption{Naive}%
+    \caption{Na\"ive}%
     \label{alg:naive}
     \begin{algorithmic}[1]
         \State {$P \gets $ Toutes les partitions de $R$}
@@ -227,7 +227,7 @@ la consommation du groupe sera la même.}
 
 Nous observons une complexité  de $O(|R|^2)$
 \begin{algorithm}[H]
-    \caption{gloutonne}%
+    \caption{Glouton}%
     \label{alg:greedy}
     \begin{algorithmic}[1]
       \While{$R \ne \emptyset$}
@@ -280,6 +280,12 @@ $[0,1, \textbf{Fin}]$ & \{\{0\}, \{1, 2, 3\}\}\\
 \end{table}
 
 \subsubsection{Le passage à la nouvelle génération:}
+Ici nous avons considéré que la mutation comme moyen 
+d'evolution de la population. Dans le principe on choisit 
+un sous-ensemble de la partition on l'agrandit ou on le réduit.
+
+Les répercussions que peut avoir cette operation est la fusion de 
+deux sous ensemble ou la division d'un sous ensembl en deux.
 
 \begin{algorithm}[H]
     \caption{Genetique}%
@@ -339,18 +345,16 @@ L'algorithme g\'en\'etique n'est pas stable, ceci est dû au caract\`ere
 aléatoire dans sa pratique.
 \begin{figure}[H]
     
-    \includegraphics[width=\textwidth]{EvsL.eps}
-    \caption{A figure caption is always placed below the illustration.
-    Please note that short captions are centered, while long ones are
-    justified by the macro package automatically.} 
+    \includegraphics[width=\textwidth]{EvsL1.eps}
+    \caption{Consommation d'énergie vs La charge du système, pour 
+    le nombre de contenu disponible \`a la station de base $m=1$} \label{fig1}
     \label{fig:evslm4}
 \end{figure}
 
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{EvsL1.eps}
-    \caption{A figure caption is always placed below the illustration.
-    Please note that short captions are centered, while long ones are
-    justified by the macro package automatically.} \label{fig1}
+    \includegraphics[width=\textwidth]{EvsL4.eps}
+    \caption{Consommation d'énergie vs La charge du système, pour 
+    le nombre de contenu disponible \`a la station de base $m=4$} \label{fig1}
 \end{figure}
 
 

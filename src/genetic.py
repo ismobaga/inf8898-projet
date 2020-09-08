@@ -40,7 +40,6 @@ def energy_genetic(reqs):
         i = int(r[2])
         # print(int(r[2]))
         E[i] = max(r[3], E[i])
-
     return sum(E.values())
 def get_fitness(p):
     """Calcule le fitness d'un individu (La consommation d'energie et le delais)

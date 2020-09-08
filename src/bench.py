@@ -42,7 +42,7 @@ class Benchmark:
 
 
 def save(fig, filename, format):
-    fig.savefig(f'{filename}.eps', format=format)
+    fig.savefig(f'{filename}.{format}', format=format)
 def plot(x, y, title=""):
     fig, ax = plt.subplots()
     ax.plot(x, y)
@@ -56,28 +56,49 @@ def plot(x, y, title=""):
     fig.savefig("test.png")
 l = 0.45
 
-lam = np.arange(0.25, 5.001, 0.20)
-greedyData = []
-geneticData = []
+lam = np.arange(0.25, 3.001, 0.20)
+for m in (1, 4):
+    greedyData = []
+    geneticData = []
+    naiveData = []
+    for l in lam:
+        if l < 0.40:
+            n = naive(data.get(l))
+            naiveData += [n]
+        g = greedy(data.get(l, m))
+        greedyData += [g]
+        ge = genetic(data.get(l, m))
+        geneticData += [ge]
+        print(g)
+        print(ge)
+        # break
 
-m = 1
-for l in np.arange(0.25, 5.001, 0.20):
-    # n = naive(data.get(l))
-    g = greedy(data.get(l, m))
-    greedyData += [g]
-    ge = genetic(data.get(l, m))
-    geneticData += [ge]
-    print(g)
-    print(ge)
+    naiveData =np.array(naiveData)
+    greedyData =np.array(greedyData)
+    geneticData =np.array(geneticData)
+    fig, ax = plt.subplots()
+    ax.plot(lam[:len(naiveData)], naiveData[:,0], label='Naive')
+    ax.plot(lam[:len(greedyData)], greedyData[:,0], label='Glouton')
+    ax.plot(lam[:len(geneticData)], geneticData[:,0], label="Génétique")
+    ax.set(xlabel='La charge du système [requetes / time slot]', ylabel='énergie [J]',
+        title="Consommation d'énergie vs La charge du système")
+    legend = ax.legend(loc='upper left', shadow=True, fontsize='x-large')
+    save(fig, f'EvsL{m}', "png")
 
-greedyData =np.array(greedyData)
-geneticData =np.array(geneticData)
-fig, ax = plt.subplots()
-# ax.plot(x, y)
-ax.plot(lam, greedyData[:,0])
-ax.plot(lam, geneticData[:,0])
+    # Delais
+    fig, ax = plt.subplots()
+    ax.plot(lam[:len(naiveData)], naiveData[:,1], label='Naive')
+    ax.plot(lam[:len(greedyData)], greedyData[:,1], label='Glouton')
+    ax.plot(lam[:len(geneticData)], geneticData[:,1], label="Génétique")
+    ax.set(xlabel='Délai [ms]', ylabel='énergie [J]',
+        title="Pénalité de retard vs La charge du système")
+    legend = ax.legend(loc='upper left', shadow=True, fontsize='x-large')
 
-save(fig, 'EvsL1', "eps")
+    save(fig, f'DvsL{m}', "png")
+
+
+
+    # input('press return to end')
 # plt.savefig('energy_charge.eps', format='eps')
 # print(data.get(2.85))
 # Benchmark.run(lambda : genetic(data.get(4.85)))
