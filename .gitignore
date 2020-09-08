@@ -6,3 +6,7 @@ __pycache__/
 *.fls
 *.fdb_latexmk
 *.pdf
+*.blg
+*.bbl
+
+*.*-*.csv
