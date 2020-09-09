@@ -32,52 +32,47 @@ class Benchmark:
 
 
 def save(fig, filename, format):
-    fig.savefig(f'rapport/{filename}.{format}', format=format)
+    fig.savefig(f'{filename}.{format}', format=format)
+def plot(x, y, title=""):
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
 
-l = 0.45
+    ax.set(xlabel='time (s)', ylabel='voltage (mV)',
+        title='About as simple as it gets, folks')
+    ax.grid()
 
-lam = np.arange(0.25, 3.001, 0.20)
-lam =  np.insert(lam, 1, [0.30, 0.35])
+    fig.show()
 
+    fig.savefig("test.png")
+
+l = 0.35
+D = np.array([5, 10, 15, 20])
 for m in (1, 4):
     greedyData = []
     geneticData = []
     naiveData = []
-    for l in lam:
+    for d in D:
         if l < 0.40:
-            n = naive(data.get(l))
+            n = naive(data.get(l,m, delai=d))
             naiveData += [n]
-        g = greedy(data.get(l, m))
+        g = greedy(data.get(l, m,  delai=d))
         greedyData += [g]
-        ge = genetic(data.get(l, m))
+        ge = genetic(data.get(l, m, delai=d))
         geneticData += [ge]
-        # print(g)
-        # print(ge)
 
     naiveData =np.array(naiveData)
     greedyData =np.array(greedyData)
     geneticData =np.array(geneticData)
 
-    # Energie vs Lambda
     fig, ax = plt.subplots()
-    ax.plot(lam[:len(naiveData)], naiveData[:,0], label='Naive')
-    ax.plot(lam[:len(greedyData)], greedyData[:,0], label='Glouton')
-    ax.plot(lam[:len(geneticData)], geneticData[:,0], label="Génétique")
-    ax.set(xlabel='La charge du système [requetes / time slot]', ylabel='énergie [J]',
-        title="Consommation d'énergie vs La charge du système")
+    ax.plot(D[:len(naiveData)], naiveData[:,0], label='Naive')
+    ax.plot(D[:len(greedyData)], greedyData[:,0], label='Glouton')
+    ax.plot(D[:len(geneticData)], geneticData[:,0], label="Génétique")
+    ax.set(xlabel='Le delai maximum [time slot]', ylabel='énergie [J]',
+        title="Consommation d'énergie vs Le delai")
     legend = ax.legend(loc='upper left', shadow=True, fontsize='x-large')
-    save(fig, f'EvsL{m}', "eps")
+    save(fig, f'EvsD{m}', "eps")
 
-    # Delais vs Lambda
-    fig, ax = plt.subplots()
-    ax.plot(lam[:len(naiveData)], naiveData[:,1], label='Naive')
-    ax.plot(lam[:len(greedyData)], greedyData[:,1], label='Glouton')
-    ax.plot(lam[:len(geneticData)], geneticData[:,1], label="Génétique")
-    ax.set(ylabel='Retard [ms]', xlabel='La charge du système',
-        title="Pénalité de retard vs La charge du système")
-    legend = ax.legend(loc='upper left', shadow=True, fontsize='x-large')
-
-    save(fig, f'DvsL{m}', "eps")
 
 
 

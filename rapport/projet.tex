@@ -334,6 +334,8 @@ et suit une distribution uniforme de \cite{huang2016}.
 Nous considérons également les valeurs d'initialisation de \cite{huang2016} 
 pour le bruit $ \tau $ comme une unité et la puissance $ \rho $ comme 
 $ 1 watt $. Pour le débit de données, nous utilisons $1Kb/ms/1Mhz$.
+La simulation est faite sur une durée de T =20. 
+Le délai $d$ d'une requête est généré entre [1, 5].
 
 
 
@@ -359,13 +361,14 @@ aléatoire dans sa pratique.
     le nombre de contenu disponible \`a la station de base $m=4$} 
     \label{fig:evslm4}
 \end{figure}
-\subsection{Consommation d'\'nergie vs Charge du syst\`eme}
+
 Nous avons utilisé une différente fonction pour évaluer la consommation 
 d'énergie pour l'algorithme génétique.
 La contrainte qui dit qu'un seul message doit être envoyé à la 
 fois n'est  pas respecté a chaque fois.
 On accepte cette exception mais avec des pénalités. 
 on peut observer les compromis sur Fig.~\ref{fig:dvslm1} et \ref{fig:dvslm4}
+\subsection{Pénalité delai vs Charge du syst\`eme}
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{DvsL1.eps}
     \caption{Consommation d'énergie vs La charge du système, pour 
@@ -379,6 +382,7 @@ on peut observer les compromis sur Fig.~\ref{fig:dvslm1} et \ref{fig:dvslm4}
     \label{fig:dvslm4}
 \end{figure}
 
+% \subsection{Consommation d'\'nergievs Maximum de delai}
 
 
 % \subsection{Temps d'ex\'ecution vs Charge du syst\`eme}

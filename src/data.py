@@ -31,19 +31,26 @@ def genReqs(l=2, de=5, m=4, T=20, seedv=1):
             ]]
     return reqs
 
-def get(lam, m=4):
-    # filename = "./data/%.2f.csv"%(lam)
-    filename = "./data/%.2f-%d.csv"%(lam, m)
+def get(lam, m=4, delai=5):
+    filename = "./data/%.2f-%d-%d.csv"%(lam, m, delai)
     return reader(filename)
 
-def generate(m=4):
+def generate(m=4, delai=5):
+    en = genReqs(l=0.30, m=m, seedv=10)
+    filename = "./data/%.2f-%d-%d.csv"%(0.30, m, delai)
+    writer(en, filename)
+
+    en = genReqs(l=0.30, m=m, seedv=10)
+    filename = "./data/%.2f-%d-%d.csv"%(0.35, m, delai)
+    writer(en, filename)
     for l in np.arange(0.25, 5.001, 0.20):
         en = genReqs(l=l, m=m, seedv=10)
-        filename = "./data/%.2f-%d.csv"%(l, m)
+        filename = "./data/%.2f-%d-%d.csv"%(l, m, delai)
         writer(en, filename)
 
 
 if __name__ == "__main__":
-    generate(m=1)
-    generate(m=4)
+    for d in [5, 10, 15, 20]:
+        generate(m=1, delai=d)
+        generate(m=4, delai=d)
     

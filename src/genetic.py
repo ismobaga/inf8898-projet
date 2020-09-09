@@ -38,7 +38,6 @@ def energy_genetic(reqs):
     # Penalisation sil ya des envoie au meme instant comsomme es deux energie
     for r in reqs:
         i = int(r[2])
-        # print(int(r[2]))
         E[i] = max(r[3], E[i])
     return sum(E.values())
 def get_fitness(p):
@@ -52,9 +51,7 @@ def get_fitness(p):
     """
     e = 0
     d = 0
-    # print(p)
     for envoie in p:
-        # print(np.array(envoie))
         e += energy_genetic(np.array(envoie))
         d += delais(np.array(envoie))
     
@@ -96,10 +93,6 @@ def _generate_individu( set_size, entries, getFitness):
     indvIdx.extend(random.sample(idx[1:-1], nbSub))
     indvIdx.sort()
     p = _generer_part_from_index(indvIdx, entries)
-    # print("entries in gen In", entries)
-    # print("len entries", len(entries))
-    # print("index", indvIdx)
-    # print("part", p)
     return Individu(indvIdx, getFitness(p))
 
 
