@@ -1,10 +1,10 @@
 
 # Projet de session 
----
-title: Projet
+
+**title**: Ordonnancement multicast pour optimiser la consommation d'énergie avec des contraintes de temps
+
 **Identification de l'étudiant**: Ismail Bagayoko (BAGI14069802)
 
----
 ## Utilisation
 Pour generer le rapport
 ```
