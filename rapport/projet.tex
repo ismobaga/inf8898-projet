@@ -96,6 +96,13 @@ L'ordonnancement multidiffusion a reçu toute l'attention au cours des
 dernières années en raison de sa capacité à réduire l'utilisation 
 des ressources dans la communication cellulaire.
 
+Les auteurs de \cite{inho2015} présentent un schéma bas\'e sur l'état 
+des canaux basé sur la qualité pour une planification gloutonne de multidiffusions.
+
+Les auteurs de \cite{inho2017} et \cite{hang2017} proposent un 
+compromis entre l'utilisation des ressources et l'équité en introduisant 
+de multiple  seuils condition de canal par groupe.
+
 
 % Organisation
 Le reste de ce projet est organis\'e comme suit. Nous présentons le modèle de réseau.
@@ -138,6 +145,13 @@ La consommation d'énergie est définie comme dans \cite{huang2016}:
 \end{equation}
 o\`u $C$ est la capacité  de notre station de base et $h$ l'état du canal.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.2]{multicast.png}
+    \caption{Source: Wikipedia
+    \url{https://en.wikipedia.org/wiki/Multicast}
+    [visité en avril, 2020]}
+\end{figure}
 \section{Formulation du problème}
 Nous considérons un ensemble $R$ de requêtes défini comme 
 $R = \{(a, d, m, e )_i\} $ 
@@ -368,16 +382,22 @@ fois n'est  pas respecté a chaque fois.
 On accepte cette exception mais avec des pénalités. 
 on peut observer les compromis sur Fig.~\ref{fig:dvslm1} et \ref{fig:dvslm4}
 \subsection{Pénalité delai vs Charge du syst\`eme}
+Sur les fig.~\ref{fig:dvslm1} et \ref{fig:dvslm4} on peut observer les pénalités 
+de retard pour la solution génétique. 
+Ce qui offre une qualité de service assez mauvaise aux utilisateurs.Même si le 
+coût d'opération est peu coûteux. 
+l'algorithme glouton reduit la consommation des ressource avec toujours le delai satifait.
+La satisfaction du délai est incontournable
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{DvsL1.eps}
-    \caption{Consommation d'énergie vs La charge du système, pour 
-    le nombre de contenu disponible \`a la station de base $m=4$} 
+    \caption{Pénalité de retard vs La charge du système, pour 
+    le nombre de contenu disponible \`a la station de base $m=1$ } 
     \label{fig:dvslm1}
 \end{figure}
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{DvsL4.eps}
-    \caption{Consommation d'énergie vs La charge du système, pour 
-    le nombre de contenu disponible \`a la station de base $m=4$} 
+    \caption{Pénalité de retard vs La charge du système, pour 
+    le nombre de contenu disponible \`a la station de base $m=4$ } 
     \label{fig:dvslm4}
 \end{figure}
 
@@ -386,6 +406,21 @@ on peut observer les compromis sur Fig.~\ref{fig:dvslm1} et \ref{fig:dvslm4}
 
 % \subsection{Temps d'ex\'ecution vs Charge du syst\`eme}
 
+
+\section*{Conclusion}
+Après avoir proposé une solution naïve.
+Nous présentons deux solutions de faible complexité 
+pour l'ordonnancement de multicast de plusieurs messages.
+Les deux solutions ont chacune leur point forts.
+L'algorithme glouton respecte toujours le délai même si 
+la consommation des ressources n'est pas la meilleure.
+
+L'algorithme génétique réduit à consommation des ressources 
+mais les utilisateurs doivent attendre pour recevoir leurs données.
+
+nous présenterons également des résultats numériques pour la 
+consommation d'énergie de la station de base dans différents scénarios.
+Il montre comment la station de base se comporte lorsque la charge de trafic change.
 \bibliographystyle{splncs04}
 \bibliography{references}
 
