@@ -10,7 +10,7 @@ rapport.pdf: rapport/projet.tex
 	pdflatex -interaction=nonstopmode projet.tex && \
 	cp projet.pdf ../rapport.pdf
 
-run: src/bench.py install
+run: src/bench.py 
 	python src/bench.py
 
 runD: src/benchD.py install
