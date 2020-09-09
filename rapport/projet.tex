@@ -1,34 +1,21 @@
-% This is samplepaper.tex, a sample chapter demonstrating the
-% LLNCS macro package for Springer Computer Science proceedings;
-% Version 2.20 of 2017/10/04
-%
+
 \documentclass[runningheads]{llncs}
-%
+
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
-% Used for displaying a sample figure. If possible, figure files should
-% be included in EPS format.
-%
-% If you use the hyperref package, please uncomment the following line
-% to display URLs in blue roman font according to Springer's eBook style:
-% \renewcommand\UrlFont{\color{blue}\rmfamily}
 
 \begin{document}
 %
 \title{Ordonnancement multicast pour optimiser la consommation d'énergie avec des contraintes de temps}
 %
 \titlerunning{Ordonnancement multicast \dots}
-% If the paper title is too long for the running head, you can set
-% an abbreviated paper title here
-%
+
 \author{Isma\"il Bagayoko\orcidID{BAGI14069802}}
 %
 \authorrunning{I. Bagayoko}
-% First names are abbreviated in the running head.
-% If there are more than two authors, 'et al.' is used.
-%
+
 \institute{Universit\'e du Qu\'ebec \`a Montr\'eal \\
 \email{bagayoko.ismail@courrier.uqam.ca}\\
 \url{} }
@@ -48,11 +35,11 @@ fonctionne plus, il n'est pas rentable en matière de ressources
 elle consiste à servir plusieurs requêtes en un seul envoi (réponse).
 Il faut attendre de recevoir  plusieurs requêtes pour les servir en 
 un seul envoi. On s'aperçoit tout de suite que l'idéal c'est d'attendre 
-infiniment et servir. Les premières requêtes vont beaucoup attendre pour 
+infiniment et servir. Les premières requêtes vont donc beaucoup attendre pour 
 être servis.
 
 Nous présentons trois approches pour ordonnancer les requêtes, afin de 
-réduire la consommation ressources et le délai.
+réduire la consommation des ressources et le délai.
 
 % Il y a un compromis à  faire ici, plus on attend plus on économise en 
 % ressources mais plus l'on attend plus nous perdons en matière de qualité 
@@ -60,7 +47,7 @@ réduire la consommation ressources et le délai.
 % qui veut minimiser l'utilisation des ressources mais respecter les d\'elais 
 % payés par les clients.
 
-La multi-diffusion bien qu'existe depuis très longtemps, au cours des 
+La multi-diffusion bien qu'existe depuis longtemps, au cours des 
 dernières années elle a suscité beaucoup d'intérêt dû aux nombreux 
 avantages qu'elle apporte: le coût en énergie, l'utilisation efficace 
 du canal et bien d'autres.
@@ -80,18 +67,18 @@ Pour répondre aux nouvelles exigences, de nouvelles technologies doivent
 être introduites. D’autres technologies, qui autre fois non réalisable en 
 raison de la puissance de calcul, doivent êtres revisité (multi-diffusion).
 
-% Problematiqu
+% Problématique
 La multidiffusion permet de servir  plusieurs utilisateurs  le même contenu dans 
 la même transmission. L'ancienne méthode (mono-diffusion) où les requêtes sont servis 
-une à la fois ne fonctionne plus, il n'est pas rentable en matière de 
+une à la fois ne fonctionne plus, elle n'est pas rentable en matière de 
 ressources (ex: énergie). C'est là qu'intervient la multi-diffusion (multicast).
 Il faut attendre de recevoir  plusieurs requêtes pour les servir en un seul
 envoi. On s'aperçoit tout de suite que l'idéal c'est d'attendre le plus longtemps
-possible puis servir servir. Les premières requêtes vont beaucoup attendre pour 
+possible puis servir. Les premières requêtes vont beaucoup attendre pour 
 être servis.
 % Nous servons plusieurs utilisateurs en une seule séance tout en respectant le délai.
 
-% Etat de l'art
+% État de l'art
 L'ordonnancement multidiffusion a reçu toute l'attention au cours des 
 dernières années en raison de sa capacité à réduire l'utilisation 
 des ressources dans la communication cellulaire.
@@ -105,9 +92,11 @@ de multiple  seuils condition de canal par groupe.
 
 
 % Organisation
-Le reste de ce projet est organis\'e comme suit. Nous présentons le modèle de réseau.
-Ensuite, la formulation du problème d'ordonnancement multicast est pr\'esent\'e.
-Des r\'esultats numériques seront fournis.
+Le reste de ce projet est organis\'e comme suit: D'abord, nous 
+présenterons le modèle de réseau, suivit de la formulation du 
+problème d'ordonnancement. Enfin, nous fournirons des résultats 
+numériques. 
+
 
 
 \section{Modèle de système}
@@ -123,7 +112,7 @@ faut une unité de temps pour le transmettre.
 
 Nous utilisons une pénalité de retard, uniformément répartie et 
 $ d_i  $ est le d\'elai associé \`a la requête  $ i $. Si la requ\^ete 
-n'est pas r\'pondu dans le délai la p\'enalit\'e de retard est appliqu\'ee.
+n'est pas r\'epondu dans le délai la p\'enalit\'e de retard est appliqu\'ee.
 
 Notre ordonnanceur multicast doit prendre la décision d'envoyer ou non 
 un message pendant un créneau horaire, afin de minimiser la consommation 
@@ -232,7 +221,7 @@ Pour l'algorithme glouton la prise de décisions  est locale.
 Il n'ordonnance pas avec anticipation des répercussions d'une décision.
 
 Notre algorithme glouton récupère la requête qui coûte le plus en transmission.
-À cette requête il essaye d'ajouter toutes les requêtes qu'il peut en respectant 
+À cette requête il essaie d'ajouter toutes les requêtes qu'il peut en respectant 
 les différentes contraintes. 
 l'algorithme fait cela jusqu'à ce qu'il n'y ait plus de requête à laquelle répondre.
 \emph{La demande sélectionnée ayant la plus grande consommation d'énergie, 
@@ -264,12 +253,13 @@ Nous observons une complexité  de $O(|R|^2)$
 
 \subsection{Un algorithme g\'en\'etique}
 Pour mettre en place l'approche génétique nous avons plusieurs prérequis:
-\subsubsection{Un individu de la population :} Comment représenter un individu de population?
-Nous utilisation un système d'indices (ou intervalles) pour représenter une partition. 
+\subsubsection{Un individu de la population :} 
+Comment représenter un individu de la population?
+Nous utilisons un système d'indices (ou intervalles) pour représenter une partition. 
 Un individu est une représentation d'une partition.
 
 \paragraph{Exemple : } Soit l'ensemble $\{1, 2, 3, 4\}$ 
-Les indices partitions possible sont :
+Les indices de partitions possibles sont :
 $[[0, \textbf{Fin}], [0,1, \textbf{Fin}], [0,1, 2, \textbf{Fin}], [0,1, 2, 3, \textbf{Fin}], [0,1, 3, \textbf{Fin}], [0,2, \textbf{Fin}], [0,2, 3, \textbf{Fin}], [0,3, \textbf{Fin}]]$
 
 L'individu [0, 1, 2, \textbf{Fin}] permets de générer la partition :  $\{\{0\}, \{1\}, \{2, 3\}\}$
@@ -280,7 +270,7 @@ L'individu [0, 1, 2, \textbf{Fin}] permets de générer la partition :  $\{\{0\}
 \end{itemize}
 \begin{table}[H]
 \centering
-\caption{D'autres examples de partition de indice}\label{tab1}
+\caption{D'autres examples de partition de indices}\label{tab1}
 \begin{tabular}{|l|l|}
 \hline
 Indices (Individu) &  Partition \\
@@ -294,21 +284,21 @@ $[0,1, \textbf{Fin}]$ & \{\{0\}, \{1, 2, 3\}\}\\
 
 \subsubsection{Le passage à la nouvelle génération:}
 Ici nous avons considéré que la mutation comme moyen 
-d'evolution de la population. Dans le principe on choisit 
-un sous-ensemble de la partition on l'agrandit ou on le réduit.
+d'\'evolution de la population. En le principe un sous-ensemble de la partition 
+est choisit afin d'\^etre agrandit ou  réduit.
 
 Les répercussions que peut avoir cette operation est la fusion de 
-deux sous ensemble ou la division d'un sous ensembl en deux.
+deux sous ensemble ou la division d'un sous ensemble en deux.
 
 \begin{algorithm}[H]
-    \caption{Genetique}%
+    \caption{Génétique}%
     \label{alg:genetic}
     \begin{algorithmic}[1]
-        \State {$P \gets $ generer une populaion}
+        \State {$P \gets $ générer une population}
         \State {$S \gets$ meilleur individu de notre population $P$}
         \While{$i <$ Nombre maximum d'iterations }
             \For{Individu dans $P$}
-                \State Fils $ \gets  $\Call{NouvelleGenration}{Individu}
+                \State Fils $ \gets  $\Call{NouvelleGeneration}{Individu}
                 \State Individu $\gets $ Fils
                 \If{Fils.Energie < S.score}
                     \State{ $S \gets $ Fils}
@@ -322,7 +312,7 @@ deux sous ensemble ou la division d'un sous ensembl en deux.
     \end{algorithmic}
 \end{algorithm}
 \begin{algorithm}[H]
-    \caption{NouvelleGenration}%
+    \caption{NouvelleGeneration}%
     \label{alg:ngeneration}
     \begin{algorithmic}[1]
         \State{sélectionner au hasard un sous-ensemble}
@@ -340,8 +330,8 @@ deux sous ensemble ou la division d'un sous ensembl en deux.
 
 \section{R\'esultats num\'eriques}
 Pour évaluer les performances de nos algorithmes, nous avons estimé la 
-consommation totale d'énergie en fonction du trafic à notre station de 
-base dans un premier temps. Le delai des utilisateurs est aussi mesur\'e.
+consommation totale d'énergie en fonction du trafic au niveau de notre station de 
+base dans un premier temps. Le délai des utilisateurs est aussi mesur\'e.
 Dans notre simulation, nous considérons que le gain du canal est constant 
 et suit une distribution uniforme de \cite{huang2016}.
 Nous considérons également les valeurs d'initialisation de \cite{huang2016} 
@@ -352,12 +342,12 @@ Le délai $d$ d'une requête est généré entre [1, 5].
 
 
 
-\subsection{Consommation d'\'nergie vs Charge du syst\`eme}
+\subsection{Consommation d'\'energie vs Charge du syst\`eme}
 Fig.~\ref{fig:evslm1} et ~\ref{fig:evslm4}  repr\'esentent la consommation d'énergie sur 
 la charge du système (nombre de requêtes par unit\'e de temps) avec 1 et 4 messages.
-Au tout début, le nos methodes ont des consommations simiulaire parce que les
+Au tout début, nos méthodes ont des consommations similaire parce que les
 trois font de la mono diffusion (unicast). Le nombre de requêtes n'est pas 
-assez nombre pour du multicast.
+assez nombreux pour du multicast.
 L'algorithme g\'en\'etique n'est pas stable, ceci est dû au caract\`ere 
 aléatoire dans sa pratique.
 \begin{figure}[H]
@@ -381,12 +371,12 @@ La contrainte qui dit qu'un seul message doit être envoyé à la
 fois n'est  pas respecté a chaque fois.
 On accepte cette exception mais avec des pénalités. 
 on peut observer les compromis sur Fig.~\ref{fig:dvslm1} et \ref{fig:dvslm4}
-\subsection{Pénalité delai vs Charge du syst\`eme}
+\subsection{Pénalité délai vs Charge du syst\`eme}
 Sur les fig.~\ref{fig:dvslm1} et \ref{fig:dvslm4} on peut observer les pénalités 
 de retard pour la solution génétique. 
-Ce qui offre une qualité de service assez mauvaise aux utilisateurs.Même si le 
-coût d'opération est peu coûteux. 
-l'algorithme glouton reduit la consommation des ressource avec toujours le delai satifait.
+Ce qui offre une qualité de service assez mauvaise aux utilisateurs. Même si le 
+coût d'opération est peu coûteux
+l'algorithme glouton réduit la consommation des ressource avec toujours le délai satisfait.
 La satisfaction du délai est incontournable
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{DvsL1.eps}
@@ -408,8 +398,8 @@ La satisfaction du délai est incontournable
 
 
 \section*{Conclusion}
-Après avoir proposé une solution naïve.
-Nous présentons deux solutions de faible complexité 
+Après avoir proposé une solution naïve nous avons présent\'e deux 
+solutions de faible complexités 
 pour l'ordonnancement de multicast de plusieurs messages.
 Les deux solutions ont chacune leur point forts.
 L'algorithme glouton respecte toujours le délai même si 
@@ -418,9 +408,9 @@ la consommation des ressources n'est pas la meilleure.
 L'algorithme génétique réduit à consommation des ressources 
 mais les utilisateurs doivent attendre pour recevoir leurs données.
 
-nous présenterons également des résultats numériques pour la 
+Nous avons présent\'e également des résultats numériques pour la 
 consommation d'énergie de la station de base dans différents scénarios.
-Il montre comment la station de base se comporte lorsque la charge de trafic change.
+Ils montrent comment la station de base se comporte lorsque la charge de trafic change.
 \bibliographystyle{splncs04}
 \bibliography{references}
 
